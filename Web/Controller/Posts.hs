@@ -9,6 +9,8 @@ import qualified Text.MMark as MMark
 
 
 instance Controller PostsController where
+    beforeAction = ensureIsUser
+
     action PostsAction = do
         posts <- query @Post
             |> orderByDesc #createdAt
@@ -27,6 +29,7 @@ instance Controller PostsController where
 
     action EditPostAction { postId } = do
         post <- fetch postId
+        -- accessDeniedUnless (post.userId == currentUserId)
         render EditView { .. }
 
     action UpdatePostAction { postId } = do

@@ -42,3 +42,13 @@ data SessionsController
     | CreateSessionAction
     | DeleteSessionAction
     deriving (Eq, Show, Data)
+data UsersController
+    = UsersAction
+    | NewUserAction
+    | ShowUserAction { userId :: !(Id User) }
+    | CreateUserAction
+    | EditUserAction { userId :: !(Id User) }
+    | UpdateUserAction { userId :: !(Id User) }
+    | DeleteUserAction { userId :: !(Id User) }
+    -- | ConfirmUserAction { userId :: !(Id User), confirmationToken :: !Text } -- <--- ADD THIS ACTION
+    deriving (Eq, Show, Data)

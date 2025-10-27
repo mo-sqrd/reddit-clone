@@ -12,6 +12,8 @@ renderMarkdown text =
 instance View ShowView where
     html ShowView { .. } = [hsx|
         {breadcrumb}
+        <h1>Hello {currentUser.email}</h1>
+
         <h1>{post.title}</h1>
         <p>{post.createdAt |> timeAgo}</p>
         <div>{post.body |> renderMarkdown}</div>
@@ -19,6 +21,8 @@ instance View ShowView where
         <a href={NewCommentAction post.id}>Add Comment</a>
 
         <div>{forEach post.comments renderComment}</div>
+
+
 
 
 
