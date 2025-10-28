@@ -12,7 +12,8 @@ renderMarkdown text =
 instance View ShowView where
     html ShowView { .. } = [hsx|
         {breadcrumb}
-        <h1>Hello {currentUser.email}</h1>
+
+        <!-- <h1>Hello {currentUser.email}</h1> -->
 
         <h1>{post.title}</h1>
         <p>{post.createdAt |> timeAgo}</p>
