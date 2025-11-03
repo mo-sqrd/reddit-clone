@@ -4,7 +4,8 @@ CREATE TABLE posts (
     title TEXT NOT NULL,
     body TEXT NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
-    user_id UUID NOT NULL
+    user_id UUID NOT NULL,
+    post_username TEXT DEFAULT '' NOT NULL
 );
 CREATE INDEX posts_created_at_index ON posts (created_at);
 CREATE TABLE comments (

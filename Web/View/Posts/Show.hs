@@ -17,7 +17,10 @@ instance View ShowView where
 
         <h1>{post.title}</h1>
         <p>{post.createdAt |> timeAgo}</p>
+
+        {renderPostActions post}
         <div>{post.body |> renderMarkdown}</div>
+
 
         <a href={NewCommentAction post.id}>Add Comment</a>
 
@@ -42,3 +45,12 @@ renderComment comment = [hsx|
         </div>
     |]
 
+
+renderPostActions :: Include "comments" Post -> Html
+renderPostActions post =
+    if post.userId == currentUserId then [hsx|
+        <div class="mb-3 d-flex gap-2">
+            <a href={EditPostAction post.id} class="btn btn-sm btn-outline-secondary">Edit</a>
+            <a href={DeletePostAction post.id} class="btn btn-sm btn-outline-danger js-delete">Delete</a>
+        </div>
+    |] else [hsx||]

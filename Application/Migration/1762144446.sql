@@ -1,0 +1,1 @@
+ALTER TABLE posts ADD COLUMN post_username TEXT DEFAULT '' NOT NULL;

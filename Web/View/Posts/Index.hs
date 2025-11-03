@@ -3,6 +3,7 @@ import Web.View.Prelude
 
 data IndexView = IndexView { posts :: [Post] }
 
+
 instance View IndexView where
     html IndexView { .. } = [hsx|
         {breadcrumb}
@@ -36,14 +37,56 @@ renderPost :: Post -> Html
 renderPost post = 
     if post.userId == currentUserId then [hsx|
     <tr>
-        <td><a href={ShowPostAction post.id}>{post.title}</a></td>
-        <td><a href={EditPostAction post.id} class="text-muted">Edit</a></td>
-        <td><a href={DeletePostAction post.id} class="js-delete text-muted">Delete</a></td>
+        <!-- main column -->
+        <td class="align-top">
+            <div>
+                <small class="text-muted">User {post.userId}</small>
+            </div>
+            <div class="mt-1">
+                <h3 class="mb-1">
+                    <a class="text-dark text-decoration-none" href={ShowPostAction post.id}>
+                        {post.title}
+                    </a>
+                </h3>
+                <p class="text-dark mb-3">{post.body}</p>
+            </div>
+        </td>
+
+        <!-- right-side actions column -->
+        <td class="align-top text-end" style="width:10%;">
+                <div class="d-flex flex-column align-items-end">
+                    <p class="text-muted text-decoration-none">{post.createdAt |> timeAgo}</p>
+
+                    <a href={EditPostAction post.id} class="btn btn-sm btn-outline-secondary mb-2">Edit</a>
+                    <a href={DeletePostAction post.id} class="btn btn-sm btn-outline-danger js-delete">Delete</a>
+                </div>
+        </td>
     </tr>
 |] else [hsx|
     <tr>
-        <td><a href={ShowPostAction post.id}>{post.title}</a></td>
-        <td></td>
-        <td></td>
+        <!-- main column -->
+        <td class="align-top">
+            <div>
+                <small class="text-muted">User {post.userId}</small>
+            </div>
+            <div class="mt-1">
+                <h3 class="mb-1">
+                    <a class="text-dark text-decoration-none" href={ShowPostAction post.id}>
+                        {post.title}
+                    </a>
+                </h3>
+                <p class="text-dark mb-3">{post.body}</p>
+            </div>
+        </td>
+
+                <!-- right-side actions column -->
+        <td class="align-top text-end" style="width:10%;">
+                <div class="d-flex flex-column align-items-end">
+                    <p class="text-muted text-decoration-none">{post.createdAt |> timeAgo}</p>
+                </div>
+        </td>
+
     </tr>
 |]
+
+
