@@ -5,15 +5,7 @@ CREATE TABLE posts (
     body TEXT NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
     user_id UUID NOT NULL,
-    post_username TEXT DEFAULT '' NOT NULL,
-    heart_count INT DEFAULT 0 NOT NULL,
-    plus_count INT DEFAULT 0 NOT NULL,
-    minus_count INT DEFAULT 0 NOT NULL,
-    laugh_count INT DEFAULT 0 NOT NULL,
-    love_count INT DEFAULT 0 NOT NULL,
-    cry_count INT DEFAULT 0 NOT NULL,
-    shock_count INT DEFAULT 0 NOT NULL,
-    angry_count INT DEFAULT 0 NOT NULL
+    post_username TEXT DEFAULT '' NOT NULL
 );
 CREATE INDEX posts_created_at_index ON posts (created_at);
 CREATE TABLE comments (

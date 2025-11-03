@@ -12,19 +12,3 @@ instance Controller SessionsController where
 
 instance Sessions.SessionsControllerConfig User 
 
-    -- action MyAction = do
-    --     case currentUserOrNothing of
-    --         Just currentUser -> do
-    --             let text = "Hello " <> currentUser.email
-    --             renderPlain text
-    --         Nothing -> renderPlain "Please login first"
-
-
--- instance Sessions.SessionsControllerConfig User where
-    -- beforeLogin = updateLoginHistory
-
-    -- updateLoginHistory user = do
-    --     user
-    --         |> modify #logins (\count -> count + 1)
-    --         |> updateRecord
-    --     pure ()
