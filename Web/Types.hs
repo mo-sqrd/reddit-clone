@@ -19,6 +19,7 @@ data PostsController
     | EditPostAction { postId :: !(Id Post) }
     | UpdatePostAction { postId :: !(Id Post) }
     | DeletePostAction { postId :: !(Id Post) }
+    --- | ReactPostAction { postId :: !(Id Post) }  -- <--- ADD THIS ACTION
     deriving (Eq, Show, Data)
 
 data CommentsController

@@ -5,7 +5,12 @@ import Web.Types
 
 -- Generator Marker
 instance AutoRoute StaticController
-instance AutoRoute PostsController
+instance AutoRoute PostsController 
+
+--- post "/posts/:postId/react" PostsController ReactPostAction
+
+--- post "/posts/:postId/react" PostsController ReactPostAction
+
 
 
 instance AutoRoute CommentsController
@@ -14,4 +19,6 @@ instance AutoRoute SessionsController
 
 
 instance AutoRoute UsersController
+
+
 
