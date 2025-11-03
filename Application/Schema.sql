@@ -21,6 +21,7 @@ CREATE TABLE users (
     password_hash TEXT NOT NULL,
     locked_at TIMESTAMP WITH TIME ZONE DEFAULT NULL,
     failed_login_attempts INT DEFAULT 0 NOT NULL,
-    logins INT NOT NULL
+    logins INT NOT NULL,
+    username TEXT DEFAULT '' NOT NULL
 );
 ALTER TABLE comments ADD CONSTRAINT comments_ref_post_id FOREIGN KEY (post_id) REFERENCES posts (id) ON DELETE NO ACTION;

@@ -9,7 +9,7 @@ instance View IndexView where
 
         <h1>Post Board<a href={pathTo NewPostAction} class="btn btn-primary ms-4">+ New</a></h1>
 
-        <h1>Hello {currentUser.email}</h1> 
+        <h1>Hello {currentUser.username}</h1> 
         <div class="table-responsive">
             <table class="table">
                 <thead>
