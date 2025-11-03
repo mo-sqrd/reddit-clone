@@ -80,7 +80,7 @@ renderPost post =
         </td>
 
                 <!-- right-side actions column -->
-        <td class="align-top text-end" style="width:10%;">
+        <td class="align-top text-end" style="width:20%;">
                 <div class="d-flex flex-column align-items-end">
                     <p class="text-muted text-decoration-none">{post.createdAt |> timeAgo}</p>
                 </div>

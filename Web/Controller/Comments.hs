@@ -58,3 +58,6 @@ instance Controller CommentsController where
 
 buildComment comment = comment
     |> fill @'["postId", "author", "body"]
+
+    |> set #userId currentUserId
+    |> set #author (get #username currentUser)

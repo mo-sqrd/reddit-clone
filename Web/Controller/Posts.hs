@@ -66,6 +66,9 @@ buildPost post = post
     |> validateField #body nonEmpty
     |> validateField #body isMarkdown
 
+    |> set #userId currentUserId
+    |> set #postUsername (get #username currentUser)
+
 isMarkdown :: Text -> ValidatorResult
 isMarkdown text =
     case MMark.parse "" text of
