@@ -71,5 +71,5 @@ instance Controller UsersController where
 
 
 buildUser user = user
-    |> fill @'["email", "passwordHash", "failedLoginAttempts", "logins", "isconfirmed"]
+    |> fill @'["email", "passwordHash", "failedLoginAttempts", "logins"]
 

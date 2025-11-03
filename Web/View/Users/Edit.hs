@@ -21,7 +21,6 @@ renderForm user = formFor user [hsx|
     {(textField #passwordHash)}
     {(textField #failedLoginAttempts)}
     {(textField #logins)}
-    {(textField #isconfirmed)}
     {submitButton}
 
 |]
