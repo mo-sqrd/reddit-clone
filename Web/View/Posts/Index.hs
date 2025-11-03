@@ -4,7 +4,6 @@ import Web.View.Prelude
 data IndexView = IndexView { posts :: [Post] }
 -- data IndexView = IndexView { posts :: [Post] , reactionsByPost :: Map (Id Post) (Map Text Int) }
 
-
 instance View IndexView where
     html IndexView { .. } = [hsx|
         {breadcrumb}
@@ -39,6 +38,7 @@ instance View IndexView where
 
 renderPost :: Post -> Html
 renderPost post = 
+
     if post.userId == currentUserId then [hsx|
     <tr>
         <!-- main column -->
@@ -55,17 +55,16 @@ renderPost post =
                 <p class="text-dark mb-3">{post.body}</p>
             </div>
 
-            <!-- Reaction UI: show emojis inline (no React button) -->
             <div id={"reactions-" <> tshow post.id} class="mt-2">
                 <div>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="❤️">❤️ </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="👍">👍 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="👎">👎 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="😂">😂 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="😍">😍 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="😢">😢 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="😱">😱 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="😡">😡 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="heart">❤️ </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="like">👍 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="unlike">👎 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="laugh">😂 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="love">😍 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="cry">😢 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="shock">😱 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="angry">😡 </span>
                 </div>
 
             </div>
@@ -100,17 +99,16 @@ renderPost post =
                 <p class="text-dark mb-3">{post.body}</p>
             </div>
 
-            <!-- Reaction UI: show emojis inline (no React button) -->
             <div id={"reactions-" <> tshow post.id} class="mt-2">
                 <div>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="❤️">❤️ </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="👍">👍 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="👎">👎 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="😂">😂 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="😍">😍 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="😢">😢 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="😱">😱 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="😡">😡 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="heart">❤️ </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="like">👍 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="unlike">👎 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="laugh">😂 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="love">😍 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="cry">😢 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="shock">😱 </span>
+                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="angry">😡 </span>
                 </div>
 
             </div>
