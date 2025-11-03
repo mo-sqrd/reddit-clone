@@ -29,7 +29,7 @@ instance Controller PostsController where
 
     action EditPostAction { postId } = do
         post <- fetch postId
-        -- accessDeniedUnless (post.userId == currentUserId)
+        accessDeniedUnless (post.userId == currentUserId)
         render EditView { .. }
 
     action UpdatePostAction { postId } = do

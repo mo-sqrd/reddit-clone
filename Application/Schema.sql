@@ -3,7 +3,8 @@ CREATE TABLE posts (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY NOT NULL,
     title TEXT NOT NULL,
     body TEXT NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
+    user_id UUID NOT NULL
 );
 CREATE INDEX posts_created_at_index ON posts (created_at);
 CREATE TABLE comments (
@@ -11,7 +12,8 @@ CREATE TABLE comments (
     post_id UUID NOT NULL,
     author TEXT NOT NULL,
     body TEXT NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
+    user_id UUID NOT NULL
 );
 CREATE INDEX comments_post_id_index ON comments (post_id);
 CREATE INDEX comments_created_at_index ON comments (created_at);
@@ -24,4 +26,8 @@ CREATE TABLE users (
     logins INT NOT NULL,
     username TEXT DEFAULT '' NOT NULL
 );
+CREATE INDEX posts_user_id_index ON posts (user_id);
+CREATE INDEX comments_user_id_index ON comments (user_id);
 ALTER TABLE comments ADD CONSTRAINT comments_ref_post_id FOREIGN KEY (post_id) REFERENCES posts (id) ON DELETE CASCADE;
+ALTER TABLE comments ADD CONSTRAINT comments_ref_user_id FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE NO ACTION;
+ALTER TABLE posts ADD CONSTRAINT posts_ref_user_id FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE NO ACTION;

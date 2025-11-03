@@ -17,7 +17,7 @@ instance View IndexView where
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Post</th>
+                        <th> Recent Posts</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -33,10 +33,17 @@ instance View IndexView where
                 ]
 
 renderPost :: Post -> Html
-renderPost post = [hsx|
+renderPost post = 
+    if post.userId == currentUserId then [hsx|
     <tr>
         <td><a href={ShowPostAction post.id}>{post.title}</a></td>
         <td><a href={EditPostAction post.id} class="text-muted">Edit</a></td>
         <td><a href={DeletePostAction post.id} class="js-delete text-muted">Delete</a></td>
+    </tr>
+|] else [hsx|
+    <tr>
+        <td><a href={ShowPostAction post.id}>{post.title}</a></td>
+        <td></td>
+        <td></td>
     </tr>
 |]
