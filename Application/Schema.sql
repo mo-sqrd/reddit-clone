@@ -24,4 +24,4 @@ CREATE TABLE users (
     logins INT NOT NULL,
     username TEXT DEFAULT '' NOT NULL
 );
-ALTER TABLE comments ADD CONSTRAINT comments_ref_post_id FOREIGN KEY (post_id) REFERENCES posts (id) ON DELETE NO ACTION;
+ALTER TABLE comments ADD CONSTRAINT comments_ref_post_id FOREIGN KEY (post_id) REFERENCES posts (id) ON DELETE CASCADE;

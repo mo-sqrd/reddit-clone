@@ -67,8 +67,6 @@ instance Controller UsersController where
         setSuccessMessage "User deleted"
         redirectTo UsersAction
 
-    -- action ConfirmUserAction { userId, confirmationToken } = Confirmations.confirmAction userId confirmationToken
-
 
 buildUser user = user
     |> fill @'["email", "passwordHash", "failedLoginAttempts", "logins"]

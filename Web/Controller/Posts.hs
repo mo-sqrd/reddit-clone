@@ -9,7 +9,7 @@ import qualified Text.MMark as MMark
 
 
 instance Controller PostsController where
-    --beforeAction = ensureIsUser
+    beforeAction = ensureIsUser
 
     action PostsAction = do
         posts <- query @Post

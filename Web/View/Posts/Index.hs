@@ -7,9 +7,12 @@ instance View IndexView where
     html IndexView { .. } = [hsx|
         {breadcrumb}
 
+        <h2>Hello {currentUser.username}!</h2> 
+        <a class="js-delete js-delete-no-confirm" href={DeleteSessionAction}>Logout</a>
+
         <h1>Post Board<a href={pathTo NewPostAction} class="btn btn-primary ms-4">+ New</a></h1>
 
-        <h1>Hello {currentUser.username}</h1> 
+
         <div class="table-responsive">
             <table class="table">
                 <thead>
