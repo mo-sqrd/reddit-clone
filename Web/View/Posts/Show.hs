@@ -39,11 +39,19 @@ instance View ShowView where
                             ]
 
 renderComment comment = [hsx|
-        <div class="mt-4">
-            <h5>{comment.author}</h5>
-            <p>{comment.body}</p>
+    <div class="mt-4 ms-4">
+        <small class="text-muted">{comment.author} - {comment.createdAt |> timeAgo}</small>
+        <div class="card mt-2">
+            <div class="card-body p-2">
+                <a class="text-dark text-decoration-none" href={ShowCommentAction comment.id}>
+                    {comment.body}
+                </a>
+            </div>
         </div>
-    |]
+    </div>
+|]
+
+
 
 
 renderPostActions :: Include "comments" Post -> Html
