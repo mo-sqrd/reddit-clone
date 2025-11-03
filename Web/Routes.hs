@@ -22,3 +22,6 @@ instance AutoRoute UsersController
 
 
 
+
+instance AutoRoute ReactionsController
+

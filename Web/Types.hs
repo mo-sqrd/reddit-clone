@@ -19,7 +19,7 @@ data PostsController
     | EditPostAction { postId :: !(Id Post) }
     | UpdatePostAction { postId :: !(Id Post) }
     | DeletePostAction { postId :: !(Id Post) }
-    --- | ReactPostAction { postId :: !(Id Post) }  -- <--- ADD THIS ACTION
+    | ReactPostAction { postId :: !(Id Post) }  -- <--- ADD THIS ACTION
     deriving (Eq, Show, Data)
 
 data CommentsController
@@ -52,4 +52,14 @@ data UsersController
     | UpdateUserAction { userId :: !(Id User) }
     | DeleteUserAction { userId :: !(Id User) }
     -- | ConfirmUserAction { userId :: !(Id User), confirmationToken :: !Text } -- <--- ADD THIS ACTION
+    deriving (Eq, Show, Data)
+
+data ReactionsController
+    = ReactionsAction
+    | NewReactionAction
+    | ShowReactionAction { reactionId :: !(Id Reaction) }
+    | CreateReactionAction
+    | EditReactionAction { reactionId :: !(Id Reaction) }
+    | UpdateReactionAction { reactionId :: !(Id Reaction) }
+    | DeleteReactionAction { reactionId :: !(Id Reaction) }
     deriving (Eq, Show, Data)
