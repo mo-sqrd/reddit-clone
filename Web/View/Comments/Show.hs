@@ -6,7 +6,7 @@ data ShowView = ShowView { comment :: Comment }
 instance View ShowView where
     html ShowView { comment } = [hsx|
         {breadcrumb}
-        <h1>Show Comment</h1>
+        <h1>Comment </h1>
 
         <div class="mt-3">
             <small class="text-muted">{comment.author} - {comment.createdAt |> timeAgo}</small>
