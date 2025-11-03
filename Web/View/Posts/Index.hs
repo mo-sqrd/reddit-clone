@@ -40,7 +40,7 @@ renderPost post =
         <!-- main column -->
         <td class="align-top">
             <div>
-                <small class="text-muted">User {post.userId}</small>
+                <small class="text-muted">User {post.postUsername}</small>
             </div>
             <div class="mt-1">
                 <h3 class="mb-1">
@@ -67,7 +67,7 @@ renderPost post =
         <!-- main column -->
         <td class="align-top">
             <div>
-                <small class="text-muted">User {post.userId}</small>
+                <small class="text-muted">User {post.postUsername}</small>
             </div>
             <div class="mt-1">
                 <h3 class="mb-1">
