@@ -56,9 +56,9 @@ data UsersController
 
 data ReactionsController
     = ReactionsAction
-    | NewReactionAction
+    | NewReactionAction 
     | ShowReactionAction { reactionId :: !(Id Reaction) }
-    | CreateReactionAction
+    | CreateReactionAction 
     | EditReactionAction { reactionId :: !(Id Reaction) }
     | UpdateReactionAction { reactionId :: !(Id Reaction) }
     | DeleteReactionAction { reactionId :: !(Id Reaction) }

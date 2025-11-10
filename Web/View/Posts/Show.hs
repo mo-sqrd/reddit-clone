@@ -2,7 +2,9 @@ module Web.View.Posts.Show where
 import Web.View.Prelude
 import qualified Text.MMark as MMark
 
-data ShowView = ShowView { post :: Include "comments" Post }
+--- data ShowView = ShowView { post :: Include "comments" Post }
+data ShowView = ShowView { post :: Include "reactions" (Include "comments" Post) }
+
 
 renderMarkdown text =
     case text |> MMark.parse "" of
@@ -21,26 +23,23 @@ instance View ShowView where
         {renderPostActions post}
         <div>{post.body |> renderMarkdown}</div>
 
-                <div>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="heart">❤️ </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="like">👍 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="unlike">👎 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="laugh">😂 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="love">😍 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="cry">😢 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="shock">😱 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="angry">😡 </span>
-                </div>
+
+
+        <div class="d-flex gap-3 align-items-center flex-wrap my-3">
+            {renderReactionButton post "heart"  "❤️"}
+            {renderReactionButton post "like"   "👍"}
+            {renderReactionButton post "unlike" "👎"}
+            {renderReactionButton post "laugh"  "😂"}
+            {renderReactionButton post "love"   "😍"}
+            {renderReactionButton post "cry"    "😢"}
+            {renderReactionButton post "shock"  "😱"}
+            {renderReactionButton post "angry"  "😡"}
+        </div>
 
 
         <a href={NewCommentAction post.id}>Add Comment</a>
 
         <div>{forEach post.comments renderComment}</div>
-
-
-
-
-
     
     |]
         where
@@ -48,6 +47,18 @@ instance View ShowView where
                             [ breadcrumbLink "Posts" PostsAction
                             , breadcrumbText "Show Post"
                             ]
+
+
+renderReactionButton :: Include "reactions" (Include "comments" Post) -> Text -> Text -> Html
+renderReactionButton post kind emoji = [hsx|
+    <form action={CreateReactionAction} method="POST" class="d-inline">
+        <input type="hidden" name="postId" value={tshow post.id}/>
+        <input type="hidden" name="kind" value={kind}/>
+        <button type="submit" class="btn btn-link p-0 m-0 align-baseline emoji-button">
+            {emoji} {renderCount (numReactions (get #reactions post) kind)}
+        </button>
+    </form>
+|]
 
 renderComment comment = [hsx|
     <div class="mt-4 ms-4">
@@ -65,9 +76,7 @@ renderComment comment = [hsx|
 
 
 
-
-
-renderPostActions :: Include "comments" Post -> Html
+renderPostActions :: Include "reactions" (Include "comments" Post) -> Html
 renderPostActions post =
     if post.userId == currentUserId then [hsx|
         <div class="mb-3 d-flex gap-2">
@@ -75,3 +84,11 @@ renderPostActions post =
             <a href={DeletePostAction post.id} class="btn btn-sm btn-outline-danger js-delete">Delete</a>
         </div>
     |] else [hsx||]
+
+-- Count helpers (unchanged)
+numReactions :: [Reaction] -> Text -> Int
+numReactions reactions kind =
+    length (filter (\r -> get #kind r == kind) reactions)
+
+renderCount :: Int -> Html
+renderCount n = if n > 0 then [hsx| {n} |] else mempty

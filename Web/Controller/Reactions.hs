@@ -13,8 +13,9 @@ instance Controller ReactionsController where
         reactions <- query @Reaction |> fetch
         render IndexView { .. }
 
-    action NewReactionAction = do
+    action NewReactionAction  = do
         let reaction = newRecord
+
         render NewView { .. }
 
     action ShowReactionAction { reactionId } = do
@@ -49,7 +50,8 @@ instance Controller ReactionsController where
                     case reaction' of
                         Just _ -> setSuccessMessage "Reaction updated"
                         Nothing -> setSuccessMessage "Reaction removed"
-                    redirectTo ReactionsAction
+                    redirectTo ShowPostAction { postId = get #postId reaction }
+
 
     action DeleteReactionAction { reactionId } = do
         reaction <- fetch reactionId
@@ -65,8 +67,8 @@ buildReaction reaction = reaction
 
 toggleReaction :: (?modelContext :: ModelContext) => Reaction -> IO (Maybe Reaction)
 toggleReaction reaction = do
-    let postId = get #postId reaction
-    let userId = get #userId reaction
+    let postId  = get #postId reaction
+    let userId  = get #userId reaction
     let newKind = get #kind reaction
 
     existingMaybe <- query @Reaction
@@ -75,33 +77,22 @@ toggleReaction reaction = do
         |> fetchOneOrNothing
 
     case existingMaybe of
+        -- No reaction yet -> create one
         Nothing -> do
-            -- no existing reaction by this user on this post -> create one (count = 1)
-            let reactionToCreate = reaction |> set #kindCount 1
-            created <- createRecord reactionToCreate
+            created <- createRecord reaction
             pure (Just created)
 
         Just existing -> do
-            let existingKind  = get #kind existing
-            let existingCount = get #kindCount existing
-
+            let existingKind = get #kind existing
             if existingKind == newKind
-                then
-                    -- clicking same kind again -> decrement (or delete if it reaches 0)
-                    if existingCount <= 1
-                        then do
-                            deleteRecord existing
-                            pure Nothing
-                        else do
-                            updated <- existing
-                                |> set #kindCount (existingCount - 1)
-                                |> updateRecord
-                            pure (Just updated)
+                then do
+                    -- Same kind clicked -> toggle OFF (delete)
+                    deleteRecord existing
+                    pure Nothing
                 else do
-                    -- different kind clicked -> switch kind and ensure count at least 1
+                    -- Different kind clicked -> switch kind
                     updated <- existing
                         |> set #kind newKind
-                        |> set #kindCount 1
                         |> updateRecord
                     pure (Just updated)
 

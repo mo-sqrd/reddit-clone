@@ -55,19 +55,6 @@ renderPost post =
                 <p class="text-dark mb-3">{post.body}</p>
             </div>
 
-            <div id={"reactions-" <> tshow post.id} class="mt-2">
-                <div>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="heart">❤️ </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="like">👍 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="unlike">👎 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="laugh">😂 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="love">😍 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="cry">😢 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="shock">😱 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="angry">😡 </span>
-                </div>
-
-            </div>
     
         </td>
 
@@ -99,19 +86,6 @@ renderPost post =
                 <p class="text-dark mb-3">{post.body}</p>
             </div>
 
-            <div id={"reactions-" <> tshow post.id} class="mt-2">
-                <div>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="heart">❤️ </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="like">👍 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="unlike">👎 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="laugh">😂 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="love">😍 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="cry">😢 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="shock">😱 </span>
-                    <span class="emoji me-2 emoji-button" data-postid={tshow post.id} data-kind="angry">😡 </span>
-                </div>
-
-            </div>
         </td>
 
                 <!-- right-side actions column -->
